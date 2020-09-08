@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _01_wpf_mvvm.ViewModels.Commands;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -31,14 +32,38 @@ namespace _01_wpf_mvvm
                 products = value;
                 OnPropertyChanged();
             }
+
         }
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
+        
+        public RelayCommand AddProductCommand { get; set; }
+        public RelayCommand DeleteProductCommand { get; set; }
 
         public ProductViewModel()
         {
             initValues();
+
+            AddProductCommand = new RelayCommand(AddProduct);
+            DeleteProductCommand = new RelayCommand(DeleteProduct, CanExecuteDeleteProduct);
+
+        }
+
+        private void AddProduct(object parameter)
+        {
+            Product p = new Product { Name = "TBD", Price = 0, Stock = 0 };
+            Products.Add ( p );
+            SelectedProduct = p;
+        }
+
+        private void DeleteProduct(object parameter)
+        {
+            Product p = SelectedProduct;
+            SelectedProduct = null;
+            Products.Remove(p);
+
+        }
+        private bool CanExecuteDeleteProduct(object parameter)
+        {
+            return SelectedProduct == null ? false : true;
         }
 
         private void initValues()

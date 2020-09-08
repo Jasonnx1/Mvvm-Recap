@@ -9,7 +9,8 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_Fichier">
-                <MenuItem Header="_Nouveau"/>
+                <MenuItem Header="_Nouveau" Command="{Binding AddProductCommand}"/>
+                <MenuItem Header="_Supprimer" Command="{Binding DeleteProductCommand}"/>
             </MenuItem>
         </Menu>
         <StackPanel DockPanel.Dock="Bottom">
@@ -44,7 +45,7 @@
                 <TextBlock Grid.Column="0" Grid.Row="0" Text="Name : "/>
                 <TextBlock Grid.Column="0" Grid.Row="1" Text="Price : "/>
                 <TextBlock Grid.Column="0" Grid.Row="2" Text="Stock : "/>
-                <TextBlock Grid.Column="0" Grid.Row="3" Text=""/>
+                <Button Grid.Column="0" Grid.Row="3" Content="Supprimer" Command="{Binding DeleteProductCommand}"/>
 
                 <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding SelectedProduct.Name}"/>
                 <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding SelectedProduct.Price}"/>
